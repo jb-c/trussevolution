@@ -1,0 +1,23 @@
+/*This file contains styles for the truss evolution page*/
+
+.Report_Wrapper{
+    background-color: rgba(84,136,150,0.8); /*Translucent background*/
+    border: 2px solid #4f544a;
+    outline: none;
+    padding: 10px;
+    padding-top: 0px;
+    width: 100%;
+    font-size: 16px;
+    color: white;
+}
+.Export_Panel{
+    width: 50%; /*Occupies the left half of the div*/
+    text-align: right;
+}
+.Details_Panel{
+    width: 50%; /*Occupies the right half of the div*/
+}
+.Export_Panel button{
+    font-size: 16px;
+    width: 50%;
+}

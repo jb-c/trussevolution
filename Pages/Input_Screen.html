@@ -1,0 +1,127 @@
+<!-- This file contains the HTML and some JavaScript for the input screen page-->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- P5 JS Library -->
+    <!-- https://p5js.org/reference/ -->
+    <script language="javascript" type="text/javascript" src="../Libraries/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="../Libraries/p5.dom.js"></script>
+    <!-- My JS Files -->
+    <script language="javascript" type="text/javascript" src="../JavaScript/Core.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Truss.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Node.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Member.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Default_Trusses.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Drawing_Trusses.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Mutation.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/InputScreen.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Global.js"></script>
+    <!-- My CSS Files -->
+    <link rel="stylesheet" type="text/css" href="../CSS/Core.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/Input_Screen.css">
+    <!-- External Sources -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- Embedded JavaScript -->
+    <script>
+    function preload() { //Initializes key variables and controls
+    	stage = ""; //Global stage variable
+        ids = [] //Global array - Tracks parent nodes for new members
+        lastForceAdded = 0; //Global index tracker
+
+    	//Stores references to HTML controls
+    	spacing_Cont = document.getElementById('Grid_spacing');
+    	span_Cont = document.getElementById('Scale_Val');
+    	lines_Cont = document.getElementById('Grid_Checkbocx');
+    	snap_Cont = document.getElementById('Snap_Grid');
+        materials_Cont = document.getElementById('material_val');
+
+        for (var m in materials) {
+            var option = document.createElement("option"); //Creates an option element
+            option.text = materials[m].name; //Adds material name to option element
+            materials_Cont.add(option); //Adds option element to combo box.
+        }
+    }
+
+    function setup() { //Creates the canvas and the input truss
+    	var Parent = document.getElementById('Canvas_Holder'); //Gets the Canvas_Holder div, so I can set the canvas to fill it.
+    	Canvas = createCanvas(Parent.offsetWidth, Parent.offsetHeight); //Offset returns the div size
+    	background(51); //Sets a black background
+    	Canvas.parent("Canvas_Holder"); //The canvas fills the canvas holder div
+        Canvas.mouseClicked(InputTruss); //Sets an event listener, activates on mouse click
+        inputTruss = new Truss(); //Creates a new truss object
+    	UpdateScale(); //Updates the scale based on the value in the input box
+    	inputTruss.Draw(true); //Draws the initial truss to the screen
+    }
+
+    function ClassToggle(e){ //A function which toggles the active class for the input buttons
+        var elements = document.getElementsByClassName("Input_Buttons"); //Gets all elements in class
+        for (var i in elements) {
+            elements[i].className = "Input_Buttons"; //Resets class to Input_Buttons
+        }
+        e.classList.toggle("ActiveBtn"); //Toggles active class
+    }
+
+    //The rest of the input functions are stored in the 'InputScreen.js' file
+    </script>
+</head>
+<body>
+    <!-- Background DIV for image to fill -->
+    <div id="Background" class="Background"></div>
+    <!-- Navigation Bar -->
+    <div id="Navigation_Bar" class="Nav_Bar">
+        <ul>
+            <li><a href="Home_Page.html">Home</a></li>
+            <li><a href="Input_Screen.html" class="Active">Get Started</a></li>
+            <li><a href="Documentation.html">Documentation</a></li>
+        </ul>
+    </div>
+    <!-- DIV for canvas to fill -->
+    <div id="Canvas_Holder" class="Canvas_Holder"></div>
+    <!-- DIV for all controls -->
+    <div id="Input_Panel" class="Input_Panel">
+        <button type="button" class = "Input_Buttons" onclick="stage = 'Nodes'; ClassToggle(this);">Add Nodes</button>
+        <button type="button" class = "Input_Buttons" onclick="stage = 'Members'; ClassToggle(this);">Add Members</button>
+        <button type="button" class = "Input_Buttons" onclick="stage = 'Forces'; ClassToggle(this);">Add Forces</button>
+        <button type="button" onclick="Undo();">Undo</button>
+        <button type="button" onclick="PassInput('defaultTruss');"><a href="Truss_Evolution.html" >Load Default Truss</a></button>
+        <button type="button" onclick="Import();">Import Truss</button>
+        <h13 id = "file"></h13><!-- Wrapper for file reader to fill -->
+        <button type="button" onclick="PassInput('inputTruss');"><a href="Truss_Evolution.html">Proceed</a></button><br><br>
+        <!-- Sub Div containing more controls-->
+        <div class="Pref_Panel_Wrapper">
+            <div class="Pref_Panel" style="display: block; float: left;">
+                <p style="color: black; text-align: center; text-decoration: underline; margin: 5px">Properties</p>
+                <input id="Grid_Checkbocx" type="checkbox" name="Grid" onclick="DisplayGridLines();">Grid Lines<br>
+                <input id="Snap_Grid" type="checkbox" name="Snap" onclick="">Snap To Grid<br>
+                <input id="Grid_spacing" type="number" name="spacing"
+                            min="1" max="1000000" value="1" style="margin:5px 0 5px">Grid (m)<br>
+                <input id="Scale_Val" type="number" name="Scale"
+                            min="1" max="1000000" value="10" style="margin:5px 0 5px" onchange="UpdateScale();">Span (m)<br>
+
+                <select id = "material_val" style="width: 113px;" onchange="UpdateMaterial();">
+                    <option value="Default" selected disabled hidden>Select Material</option>
+                </select>Material<br>
+
+                <input id="Default_Truss" type="number" name="Default_Truss"
+                            min="1" max="4" value="1" style="margin:5px 0 0">Default Truss #<br>
+            </div>
+            <!-- Sub div containing preference sliders -->
+            <div class="Pref_Panel" style="display: block; float: right;">
+                <p style="color: black; text-align: center; text-decoration: underline; margin: 5px">Preferences</p>
+                Deformation: <h10 id="Slider_Def_T">1.0</h10>
+                    <input type="range" min="0" max="2" value="1" step="0.1" class="Slider" id="Slider_Def"
+                                oninput="SliderValues(this.id,this.value);"><br>
+                Weight: <h10 id="Slider_Wei_T">1.0</h10>
+                    <input type="range" min="0" max="2" value="1" step="0.1" class="Slider" id="Slider_Wei"
+                                oninput="SliderValues(this.id,this.value);"><br>
+                Cost: <h10 id="Slider_Cos_T">1.0</h10>
+                    <input type="range" min="0" max="2" value="1" step="0.1" class="Slider" id="Slider_Cos"
+                                oninput="SliderValues(this.id,this.value);"><br>
+                Same Height: <h10 id="Slider_Hei_T">1.0</h10>
+                    <input type="range" min="0" max="2" value="1" step="0.1" class="Slider" id="Slider_Hei"
+                                oninput="SliderValues(this.id,this.value);">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

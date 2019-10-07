@@ -1,0 +1,60 @@
+/*This file contains styles for the home page*/
+
+.Background {
+    background-image: url("../Media/Background_Image.jpg")!important; /*Allows the specification of a different image*/
+    transform: scaleX(1); /*Flips the image in the x-axis*/
+}
+
+.Title-Tag {
+    font-family: Roboto;
+    color: #122C34;
+    position: fixed;
+}
+
+.Title-Tag h1 {
+    font-size: 60px;
+    position: fixed;
+    left: 50%;
+    top: 17%;
+}
+
+.Title-Tag h2 {
+    font-size: 30px;
+    position: fixed;
+    left: 50%;
+    top: 40%;
+}
+
+.Title-Tag a {
+    font-size: 25px;
+    color: #071013;
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%); /*Centres the text*/
+    padding: 16px 16px;
+    text-decoration: none; /*Removes Underline*/
+    border-bottom: 0px none #8EC9BF; /*Invisible Border For A Smooth Transition*/
+    padding-bottom: 2px;
+}
+
+.Title-Tag a:hover {
+    animation: Tag_Hover_Effect 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards; /*Keeps Animation On Animation Time Has Elapsed*/
+}
+
+@keyframes Tag_Hover_Effect {
+    from {
+        border-bottom: 0px none white;
+        padding-bottom: 2px;
+        font-size: 25px;
+        color: #071013;
+    }
+    to {
+        border-bottom: 2px solid #8EC9BF;
+        padding-bottom: 0px;
+        font-size: 27px;
+        color: #224870;
+    }
+}

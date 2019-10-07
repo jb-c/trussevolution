@@ -1,0 +1,32 @@
+<!-- This file contains the HTML for the documentation page-->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- My CSS Files -->
+    <link rel="stylesheet" type="text/css" href="../CSS/Core.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/Home_Page.css">
+    <!-- External Sources -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body>
+    <!-- Background DIV for image to fill -->
+    <div id="Background" class="Background"></div>
+    <!-- Navigation Bar -->
+    <div id="Navigation_Bar" class="Nav_Bar">
+        <ul>
+            <li><a href="Home_Page.html">Home</a></li>
+            <li><a href="Input_Screen.html">Get Started</a></li>
+            <li><a href="Documentation.html" class="Active">Documentation</a></li>
+        </ul>
+    </div>
+    <!-- Contains actual content for the page -->
+    <div id = 'Content' style = 'width: 60% ;position: fixed; top: 10%; left:50%; transform: translate(-50%,0); padding: 15px; background-color: #8ab8c5;'>
+        <h2 style = "text-align: left; font-size: 25px;">A Demo Video</h2>
+            Please view the video below to gain an understanding of how to use the program.<br>
+            <video width="100%;" height="auto;" controls style = " margin-left: auto; margin-right: auto; display: block">
+                <source src="../Media/Demo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+    </div>
+</body>
+</html>

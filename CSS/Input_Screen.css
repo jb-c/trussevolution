@@ -1,0 +1,108 @@
+/*This file contains styles for the input screen page*/
+
+.Background {
+    background-image: url("../Media/Background_Image.jpg")!important; /*Allows the specification of a different image*/
+    transform: scaleX(1); /*Flips the image in the x-axis*/
+}
+
+.Canvas_Holder {
+    position: fixed;
+    left: 50%;
+    margin-top: 5px;
+    width: 80%;
+    height: 55%;
+    padding: 0px;
+    transform: translate(-50%, 0); /*Centres the Canvas Horizontally*/
+}
+
+.Input_Panel {
+    font-family: sans-serif;
+    position: fixed;
+    left: 50%;
+    width: 100%;
+    top: 60%;
+    margin-top: 30px;
+    transform: translate(-50%, 0);
+    width: auto;
+    height: auto;
+    display: inline-block;
+}
+
+.Input_Panel button {
+    margin: 5px;
+    padding: 10px 10px;
+    font-size: 19px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    background-color: #8EC9BF;
+    border: 2px solid #4f544a;
+    outline: none;
+}
+
+.ActiveBtn{
+    background-color: #839791 !important;
+}
+
+.Input_Panel button:hover:not(.ActiveBtn) { /*Applies a hover effect on not active buttons*/
+    animation: Button_Hover_Effect2 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    /*Keeps Animation On After Time*/
+    animation-play-state: running;
+}
+
+.Input_Panel button a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.Pref_Panel_Wrapper{
+    background-color: rgba(84,136,150,0.8);
+    border: 2px solid #4f544a;
+    outline: none;
+    min-height: 173px; /*Sets a min size so background displays over controls*/
+    padding: 10px;
+    padding-top: 0px;
+}
+.Pref_Panel{
+    text-align: left;
+    color: white;
+    font-size: 16px;
+}
+
+.Pref_Panel h10{
+    color: black;
+    float: right; /*Aligns to right of slider */
+}
+
+.Slider{
+    -webkit-appearance: none; /*Removes default style */
+    height: 2px;
+    background-color: #D1DBDA;
+    outline: none; /*Gets rid of box outline */
+    float: right; /*Aligns to right of text */
+    margin: 8px; /*Sets spacing between each slider, vertically*/
+}
+
+
+.Slider::-webkit-slider-thumb{
+    -webkit-appearance: none; /*Removes default style*/
+    background-color: #666;
+    border-radius: 90%; /*Rounds corners*/
+    width: 16px;
+    height: 16px;
+}
+
+@keyframes Button_Hover_Effect2 {
+    from {
+        color: white;
+        background-color: #8EC9BF;
+        border: 2px solid #4f544a;
+    }
+    to {
+        color: black;
+        background-color: #9cf4e9;
+        border: 2px solid #40696d;
+    }
+}

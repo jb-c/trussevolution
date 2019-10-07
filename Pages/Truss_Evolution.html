@@ -1,0 +1,92 @@
+<!-- This file contains the HTML and some JavaScript for the truss evolution page-->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Libraries -->
+    <!-- https://p5js.org/reference/ -->
+    <!-- http://mathjs.org/index.html -->
+    <!-- https://lodash.com/ -->
+    <script language="javascript" type="text/javascript" src="../Libraries/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="../Libraries/p5.dom.js"></script>
+    <script language="javascript" type="text/javascript" src="../Libraries/lodash.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../Libraries/math.min.js"></script>
+
+    <!-- My JavaScript Files -->
+    <script language="javascript" type="text/javascript" src="../JavaScript/Core.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Truss.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Node.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Member.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Default_Trusses.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Drawing_Trusses.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Deformation.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Mutation.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Genetic.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/TrussEvolution.js"></script>
+    <script language="javascript" type="text/javascript" src="../JavaScript/Global.js"></script>
+
+    <!-- My CSS Files -->
+    <link rel="stylesheet" type="text/css" href="../CSS/Core.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/Input_Screen.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/Truss_Evolution.css">
+    <!-- External Sources -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- Embedded JavaScript -->
+    <script>
+        function setup() { //Initializes the canvas
+            var Parent = document.getElementById('Canvas_Holder'); //Gets the Canvas_Holder div, so I can set the canvas to fill it.
+            var Canvas = createCanvas(Parent.offsetWidth, Parent.offsetHeight); //Gets size of parent div
+            background(51); //Sets a black background
+            Canvas.parent("Canvas_Holder"); //The canvas fills the canvas holder div
+        }
+        //The rest of the setup functions are stored in the 'TrussEvolution.js' file
+    </script>
+</head>
+    <body onload="GetInput(); InitializePopulation(populationSize);"><!-- Runs as soon as the page loads-->
+    <!-- Background DIV for image to fill -->
+    <div id="Background" class="Background"></div>
+    <!-- Navigation Bar -->
+    <div id="Navigation_Bar" class="Nav_Bar">
+        <ul>
+            <li><a href="Home_Page.html">Home</a></li>
+            <li><a href="Input_Screen.html" class="Active">Get Started</a></li>
+            <li><a href="Documentation.html">Documentation</a></li>
+        </ul>
+    </div>
+    <!-- Parent DIV for the canvas to fill-->
+    <div id="Canvas_Holder" class="Canvas_Holder"></div>
+    <!-- Main div for controls-->
+    <div id="Input_Panel" class="Input_Panel">
+        <button type="button" onclick="iterationinterval = setInterval(GeneticIteration,300);">Iterate Forever</button>
+        <button type="button" onclick="clearInterval(iterationinterval);">Pause Iteration</button>
+        <button type="button" onclick="var i = 0; drawInterval = setInterval(function(){i++;DrawTrussesArray(i)},200)">Draw Array</button><br>
+        <!-- Sub div for boxed controls-->
+        <div id = "Report_Wrapper" class = "Report_Wrapper" style = "top: 75%; display: inline-block;">
+            <!-- Sub div for right hand side panel-->
+            <div id = "Export_Panel"  class = "Export_Panel" style= "display: block; float: right;">
+                <p style="color: black; text-align: center; text-decoration: underline; margin: 5px">Report Options</p>
+                <select id = "graph_val" style="width: 20px">
+                    <option value="" selected disabled hidden>Select Graph Value</option>
+                    <option value = "fitness">Fitness</opiton>
+                    <option value = "deformation">Total Deformation</opiton>
+                    <option value = "weight">Weight</opiton>
+                    <option value = "cost">Cost</opiton>
+                    <option value = "height">Height</opiton>
+                </select>
+                <button type="button" onclick="SaveGraph(document.getElementById('graph_val').value);">Save Graph</button><br>
+                <button type="button" onclick="LogProperties(1);">Save Log</button><br>
+                <button type="button" onclick="Export(1);">Export Truss</button><br>
+            </div>
+            <!-- Sub div for left hand side panel-->
+            <div id = "Details_Panel" class = "Details_Panel" style= "display: block; float: left; line-height: 20px;">
+                <p style="color: black; text-align: center; text-decoration: underline; margin: 5px">Current Improvement</p>
+                Total Deformation:<h11 id = "Def_Label" style = "color: black;">0%</h11><br>
+                Weight:<h11 id = "Wei_Label" style = "color: black;">0%</h11><br>
+                Cost:<h11 id = "Cost_Label" style = "color: black;">0%</h11><br>
+                Change In Height:<h11 id = "Hei_Label" style = "color: black;">0%</h11><br>
+                Material:<h12 id = "Mat_Label" style = "color: black;">Iterate To Load</h12><br>
+                Recommended Material:<h12 id = "RecMat_Label" style = "color: black;">Iterate To Load</h12>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

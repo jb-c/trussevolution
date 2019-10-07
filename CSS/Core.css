@@ -1,0 +1,69 @@
+/*This file contains general styling used on all pages*/
+
+body {
+    margin: 0; /*Removes padding round the edge of the screen*/
+    overflow: hidden; /*Hides scroll bars*/
+}
+
+.Background {
+    background-image: url("../Media/Background_Image.jpg");
+    background-size: cover; /*Makes the image fill the screen*/
+    overflow: hidden; /*Removes scroll bars*/
+    position: fixed; /*Allows position to be specified*/
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1; /*Draws underneath other elements*/
+}
+
+.Nav_Bar ul {
+    list-style-type: none; /*Removes the bullet points*/
+    width: 100%;
+    height: 100%;
+    background-color: #24686D;
+    margin: 0px 0px;
+    padding: 3px 3px;
+    overflow: hidden; /*If the links are bigger than their parent div, overflow is hidden*/
+}
+
+.Nav_Bar ul li {
+    display: inline-block;/*Makes each list item a block container which
+                           is formatted inline, i.e. not a new element*/
+    background-color: #4A8684;
+    margin: 3px 3px;
+    padding: 0px 0px;
+    font-size: 20px;
+    font-family: Roboto;
+}
+
+.Nav_Bar ul li a {
+    display: block; /*Treats each element as a block container*/
+    color: #000;
+    padding: 16px 16px;
+    text-decoration: none; /*Removes the underline & colouring of the links*/
+}
+
+.Nav_Bar ul li a.Active {
+    background-color: #8EC9BF;
+    color: white;
+}
+
+.Nav_Bar ul li a:hover:not(.Active) {
+    animation: Button_Hover_Effect 0.5s; /*Calls the animation*/
+    animation-timing-function: ease-out; /*Smoothens the start and end*/
+    animation-fill-mode: forwards; /*Keeps Animation On After 0.5s*/
+}
+
+@keyframes Button_Hover_Effect {
+    from {
+        box-shadow: 0px 0px 0px 0px white inset;
+        background-color: #4A8684;
+        color: black;
+    }
+    to {
+        box-shadow: 0px 0px 1px 2px white inset;
+        background-color: #8EC9BF;
+        color: white;
+    }
+}
