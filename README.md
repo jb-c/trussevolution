@@ -1,7 +1,7 @@
 # Evolutionary Truss Analysis
 Improves truss structures with a genetic algorithm.
 
-![alt text](https://github.com/jb-c/trussevolution/blob/master/Media/beforeandafter.png "Before and After")
+![alt text](https://github.com/jb-c/trussevolution/blob/master/Media/readmepic.png "Before and After")
 
 [Live Demo](https://www.google.com) (Only rested on desktop chrome for windows 10)
 
