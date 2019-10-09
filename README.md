@@ -3,7 +3,7 @@ Improves truss structures with a genetic algorithm.
 
 ![alt text](https://github.com/jb-c/trussevolution/blob/master/Media/readmepic.png "Before and After")
 
-[Live Demo](https://www.google.com) (Only rested on desktop chrome for windows 10)
+[Live Demo](https://evolutionarytrussanalasis.000webhostapp.com/Pages/Home_Page.html) (Only rested on desktop chrome for windows 10)
 
 ## How This Works
 1. The user enters a truss design and criteria they want to optimize.
